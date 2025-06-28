@@ -1,0 +1,18 @@
+# Python
+*.pyc
+__pycache__/
+.venv/ # 你的虛擬環境目錄，請根據你實際的虛擬環境名稱修改
+venv/  # 另一種常見的虛擬環境名稱
+env/   # 另一種常見的虛擬環境名稱
+
+# Django
+db.sqlite3
+/media/ # 用戶上傳的文件
+/static/ # collectstatic 生成的靜態文件
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/ # 如果你使用 VS Code 且不想分享其設定
+.idea/ # 如果你使用 PyCharm
