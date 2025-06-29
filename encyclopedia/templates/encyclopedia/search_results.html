@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    搜尋結果：{{ query }}
+{% endblock %}
+
+{% block body %}
+    <h1>搜尋結果：{{ query }}</h1>
+
+    {% if entries %}
+        <ul>
+            {% for entry in entries %}
+                <li><a href="{% url 'entry' title=entry %}">{{ entry }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>沒有找到與 "{{ query }}" 相關的條目。</p>
+    {% endif %}
+
+{% endblock %}

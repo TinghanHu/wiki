@@ -1,0 +1,38 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title_page }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ title_page }}</h1>
+
+    <form action="{% url 'edit_page' title=title %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {# 編輯頁面通常不允許修改標題，或者讓標題為只讀 #}
+            {# 這裡我們將標題作為一個隱藏字段傳遞，或作為只讀文本顯示 #}
+            <label for="id_title">標題:</label>
+            <input type="text" name="title" id="id_title" value="{{ title }}" class="form-control" readonly>
+            {# 或者如果您想讓 title 在表單中出現但不可編輯，可以這樣寫 #}
+            {# {{ form.title.label_tag }} #}
+            {# {{ form.title }} #}
+            {# 這裡我們直接顯示並設置為只讀，因為 title 是從 URL 來的 #}
+            {# 如果您在 NewEntryForm 中沒有將 title 設置為不可編輯，上面的 form.title 會顯示一個可編輯的 input #}
+            {# 但這裡我們根據 assignment 的假設，不允許用戶改變已存在的 title #}
+        </div>
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+            {# 顯示內容欄位的錯誤信息 (如果有的話) #}
+            {% if form.content.errors %}
+                <ul class="errorlist">
+                    {% for error in form.content.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input type="submit" value="儲存更改" class="btn btn-primary">
+    </form>
+{% endblock %}

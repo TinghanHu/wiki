@@ -1,0 +1,28 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title_page }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ title_page }}</h1>
+
+    {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    <form action="{% url 'new_page' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+        <div class="form-group">
+            {{ form.content.label_tag }}
+            {{ form.content }}
+        </div>
+        <input type="submit" value="儲存頁面" class="btn btn-primary">
+    </form>
+{% endblock %}
